@@ -13,22 +13,53 @@ const maxWidth = {
   maxWidth: "90%"
 };
 
+const Oneup = ({ totalVisible, setTotalVisible }) => {
+  const [visible, setVisible] = useState(true);
+  return (
+    <img
+      style={{ width: 122, margin: 8, opacity: visible ? 1 : 0 }}
+      src="1up.png"
+      onClick={() => {
+        if (visible) {
+          setVisible(false);
+          setTotalVisible(totalVisible - 1);
+        }
+      }}
+    />
+  );
+};
+
 function App() {
   const [data, setData] = useState();
+  const [totalVisible, setTotalVisible] = useState(10);
   useEffect(() => {
     async function fetchData() {
       const data = await (await fetch(postURL)).json();
       setData(data);
-      console.log(data);
     }
     fetchData();
   }, []);
   if (!data) return null;
+  if (!totalVisible)
+    return (
+      <div
+        style={{
+          background: "url(gameover.jpg)",
+          backgroundSize: "cover",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          height: "100vh",
+          width: "100vw",
+          backgroundPosition: "center center"
+        }}
+      ></div>
+    );
   return (
     <Router>
       <div className="App">
         <h1 style={{ fontSize: "4rem", paddingTop: "4rem", ...maxWidth }}>
-          10up
+          {totalVisible}up
           <div style={{ fontSize: "2rem" }}>
             <Route exact path="/:slug">
               <Link to="/" style={{ textDecoration: "none" }}>
@@ -38,19 +69,28 @@ function App() {
             </Route>
           </div>
         </h1>
-        <div style={{ marginBottom: "4rem" }}>
+        <div style={{ marginBottom: "4rem", marginTop: "1rem" }}>
           <Route exact path="/">
-            <div
-              style={{
-                maxWidth: 900,
-                margin: "0 auto",
-                height: "320px",
-                backgroundImage: "url(10up.png)",
-                backgroundSize: "contain",
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "center"
-              }}
-            />
+            <div style={{ textAlign: "center" }}>
+              {Array(5)
+                .fill(0)
+                .map(_ => (
+                  <Oneup
+                    totalVisible={totalVisible}
+                    setTotalVisible={setTotalVisible}
+                  />
+                ))}
+            </div>
+            <div style={{ textAlign: "center" }}>
+              {Array(5)
+                .fill(0)
+                .map(_ => (
+                  <Oneup
+                    totalVisible={totalVisible}
+                    setTotalVisible={setTotalVisible}
+                  />
+                ))}
+            </div>
           </Route>
         </div>
         <Switch>
