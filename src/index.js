@@ -4,7 +4,8 @@ import React, { useState, useEffect } from "react";
 import TimeAgo from "react-timeago";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-const postURL = "https://exercise.10uplabs.com/wp-json/wp/v2/posts";
+const postURL =
+  "https://cors-anywhere.herokuapp.com/https://exercise.10uplabs.com/wp-json/wp/v2/posts";
 
 const maxWidth = {
   width: 680,
