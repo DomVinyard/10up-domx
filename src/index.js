@@ -38,18 +38,21 @@ function App() {
             </Route>
           </div>
         </h1>
-        <div
-          style={{
-            maxWidth: 900,
-            margin: "0 auto",
-            height: "320px",
-            backgroundImage: "url(10up.png)",
-            backgroundSize: "contain",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
-            marginBottom: "4rem"
-          }}
-        />
+        <div style={{ marginBottom: "4rem" }}>
+          <Route exact path="/">
+            <div
+              style={{
+                maxWidth: 900,
+                margin: "0 auto",
+                height: "320px",
+                backgroundImage: "url(10up.png)",
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center"
+              }}
+            />
+          </Route>
+        </div>
         <Switch>
           <Route exact path="/">
             <div
